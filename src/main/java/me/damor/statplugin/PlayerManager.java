@@ -42,8 +42,8 @@ public class PlayerManager {
         PlayerStat playerStat = playerStats.get(player.getName());
 
         playerStat.xp += XP_PER_KILL;
-        // Algorithm: BASE_XP_LEVEL_UP + (XP_PER_KILL * level^2)
-        int requiredXp = BASE_XP_LEVEL_UP + (XP_PER_KILL * (playerStat.levelOverall * playerStat.levelOverall));
+        // Algorithm: BASE_XP_LEVEL_UP + (XP_PER_KILL * level^3)
+        int requiredXp = BASE_XP_LEVEL_UP + (XP_PER_KILL * (int)Math.pow(playerStat.levelOverall, 3));
 
         while (playerStat.xp >= requiredXp){
             // Level up player
