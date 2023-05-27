@@ -1,6 +1,7 @@
 package me.damor.statplugin;
 
 import me.damor.statplugin.commands.StatGetCommand;
+import me.damor.statplugin.commands.StatResetCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StatPlugin extends JavaPlugin {
@@ -26,6 +27,7 @@ public final class StatPlugin extends JavaPlugin {
 
         // Register commands
         getCommand("statget").setExecutor(new StatGetCommand(playerManager));
+        getCommand("statreset").setExecutor(new StatResetCommand(playerManager));
     }
 
     @Override

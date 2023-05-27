@@ -6,3 +6,6 @@ commands:
   statget:
     description: Retrieve player level and stats.
     usage: /statget
+  statreset:
+    description: Reset level and stats. (THIS CANNOT BE UNDONE!)
+    usage: /statreset
