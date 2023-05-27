@@ -2,3 +2,7 @@ name: StatPlugin
 version: '${project.version}'
 main: me.damor.statplugin.StatPlugin
 api-version: 1.19
+commands:
+  statget:
+    description: Retrieve player level and stats.
+    usage: /statget

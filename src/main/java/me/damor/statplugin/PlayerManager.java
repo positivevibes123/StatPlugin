@@ -34,6 +34,10 @@ public class PlayerManager {
         return plugin.getDataFolder() + "/" + name + ".json";
     }
 
+    public PlayerStat getPlayerStat(Player player){
+        return playerStats.get(player.getName());
+    }
+
     public void givePlayerXp(Player player){
         PlayerStat playerStat = playerStats.get(player.getName());
 

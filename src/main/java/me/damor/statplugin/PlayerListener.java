@@ -26,7 +26,8 @@ public class PlayerListener implements Listener {
 
         playerManager.addPlayer(player);
 
-        player.sendMessage(ChatColor.DARK_GREEN + "You are playing with Dan's Stat Plugin! Level up and gain buffs!");
+        player.sendMessage(ChatColor.DARK_GREEN + "You are playing with Dan's Stat Plugin! Level up and gain buffs!\n" +
+                "Type /help StatPlugin in order to see a full list of commands.");
     }
 
     @EventHandler
