@@ -9,3 +9,9 @@ commands:
   statreset:
     description: Reset level and stats. (THIS CANNOT BE UNDONE!)
     usage: /statreset
+  statenable:
+    description: Enable stats if they aren't already enabled. (Leveling up auto re-enables!)
+    usage: /statenable
+  statdisable:
+    description: Disable stats if they are enabled.
+    usage: /statdisable

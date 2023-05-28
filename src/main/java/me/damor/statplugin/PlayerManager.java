@@ -97,6 +97,22 @@ public class PlayerManager {
         }
     }
 
+    public void removeEffects(Player player){
+        PlayerStat playerStat = playerStats.get(player.getName());
+
+        if (playerStat.swiftnessLevel > 0){
+            player.removePotionEffect(PotionEffectType.SPEED);
+        }
+
+        if (playerStat.strengthLevel > 0){
+            player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+        }
+
+        if (playerStat.luckLevel > 0){
+            player.removePotionEffect(PotionEffectType.LUCK);
+        }
+    }
+
     public void addPlayer(Player player){
         String name = player.getName();
 
