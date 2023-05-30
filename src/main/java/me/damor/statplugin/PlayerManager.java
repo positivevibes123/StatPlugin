@@ -31,7 +31,7 @@ public class PlayerManager {
     }
 
     private String getPlayerDir(String name){
-        return plugin.getDataFolder() + "/" + name + ".json";
+        return plugin.getDataFolder() + File.separator + name + ".json";
     }
 
     public PlayerStat getPlayerStat(Player player){
@@ -127,6 +127,7 @@ public class PlayerManager {
                 FileReader reader = new FileReader(playerFile);
                 PlayerStat playerStat = gson.fromJson(reader, PlayerStat.class);
                 playerStats.put(name, playerStat);
+                plugin.getLogger().info("Loading " + name + "'s file from: " + getPlayerDir(name));
                 reader.close();
             } catch (IOException e){
                 plugin.getLogger().severe("Error loading data file from player " + name);
@@ -149,6 +150,7 @@ public class PlayerManager {
         if (!playerFile.isFile()){
             try{
                 playerFile.createNewFile();
+                plugin.getLogger().info("Creating new file for " + name + " at: " + getPlayerDir(name));
             } catch (IOException e){
                 plugin.getLogger().severe("Error creating data file for player " + name);
             }

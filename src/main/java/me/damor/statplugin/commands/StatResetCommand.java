@@ -21,6 +21,8 @@ public class StatResetCommand implements CommandExecutor {
         Player player = (Player)commandSender;
         PlayerStat playerStat = playerManager.getPlayerStat(player);
 
+        playerManager.removeEffects(player);
+
         playerStat.levelOverall = 1;
         playerStat.xp = 0;
         playerStat.luckLevel = 0;
