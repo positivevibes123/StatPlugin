@@ -15,3 +15,6 @@ commands:
   statdisable:
     description: Disable stats if they are enabled.
     usage: /statdisable
+  statreroll:
+    description: Reroll stats.
+    usage: /statreroll

@@ -1,9 +1,6 @@
 package me.damor.statplugin;
 
-import me.damor.statplugin.commands.StatDisableCommand;
-import me.damor.statplugin.commands.StatEnableCommand;
-import me.damor.statplugin.commands.StatGetCommand;
-import me.damor.statplugin.commands.StatResetCommand;
+import me.damor.statplugin.commands.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StatPlugin extends JavaPlugin {
@@ -32,6 +29,7 @@ public final class StatPlugin extends JavaPlugin {
         getCommand("statreset").setExecutor(new StatResetCommand(playerManager));
         getCommand("statenable").setExecutor(new StatEnableCommand(playerManager));
         getCommand("statdisable").setExecutor(new StatDisableCommand(playerManager));
+        getCommand("statreroll").setExecutor(new StatRerollCommand(playerManager));
     }
 
     @Override

@@ -38,6 +38,38 @@ public class PlayerManager {
         return playerStats.get(player.getName());
     }
 
+    public void rollPlayerStats(Player player){
+        PlayerStat playerStat = getPlayerStat(player);
+
+        // Get number in range of 0 - 2 inclusive
+        int random = (int)(Math.random() * (2 + 1));
+
+        switch (random){
+            case 0:
+                player.sendMessage(ChatColor.BLUE + "Swiftness increased!");
+                playerStat.swiftnessLevel++;
+                break;
+            case 1:
+                player.sendMessage(ChatColor.RED + "Strength increased!");
+                playerStat.strengthLevel++;
+                break;
+            case 2:
+                player.sendMessage(ChatColor.DARK_GREEN + "Luck increased!");
+                playerStat.luckLevel++;
+                break;
+        }
+    }
+
+    public void resetPlayerStats(Player player){
+        PlayerStat playerStat = getPlayerStat(player);
+
+        playerStat.levelOverall = 1;
+        playerStat.xp = 0;
+        playerStat.luckLevel = 0;
+        playerStat.swiftnessLevel = 0;
+        playerStat.strengthLevel = 0;
+    }
+
     public void givePlayerXp(Player player){
         PlayerStat playerStat = playerStats.get(player.getName());
 
@@ -55,23 +87,7 @@ public class PlayerManager {
                 p.sendMessage(ChatColor.YELLOW + player.getName() + " has reached level " + playerStat.levelOverall + "!");
             }
 
-            // Get number in range of 0 - 2 inclusive
-            int random = (int)(Math.random() * (2 + 1));
-
-            switch (random){
-                case 0:
-                    player.sendMessage(ChatColor.BLUE + "Swiftness increased!");
-                    playerStat.swiftnessLevel++;
-                    break;
-                case 1:
-                    player.sendMessage(ChatColor.RED + "Strength increased!");
-                    playerStat.strengthLevel++;
-                    break;
-                case 2:
-                    player.sendMessage(ChatColor.DARK_GREEN + "Luck increased!");
-                    playerStat.luckLevel++;
-                    break;
-            }
+            rollPlayerStats(player);
 
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
             applyEffects(player);
