@@ -21,6 +21,7 @@ public class PlayerManager {
 
     private static final int BASE_XP_LEVEL_UP = 200;
     private static final int XP_PER_KILL = 50;
+    private static final int STAT_LEVEL_CAP = 10;
 
     public PlayerManager(StatPlugin plugin){
         this.plugin = plugin;
@@ -41,22 +42,38 @@ public class PlayerManager {
     public void rollPlayerStats(Player player){
         PlayerStat playerStat = getPlayerStat(player);
 
+        // If all stats are at their max then do nothing
+        if (playerStat.strengthLevel >= STAT_LEVEL_CAP && playerStat.luckLevel >= STAT_LEVEL_CAP && playerStat.swiftnessLevel >= STAT_LEVEL_CAP){
+            return;
+        }
+
         // Get number in range of 0 - 2 inclusive
         int random = (int)(Math.random() * (2 + 1));
 
-        switch (random){
-            case 0:
-                player.sendMessage(ChatColor.BLUE + "Swiftness increased!");
-                playerStat.swiftnessLevel++;
-                break;
-            case 1:
-                player.sendMessage(ChatColor.RED + "Strength increased!");
-                playerStat.strengthLevel++;
-                break;
-            case 2:
-                player.sendMessage(ChatColor.DARK_GREEN + "Luck increased!");
-                playerStat.luckLevel++;
-                break;
+        if (random == 0){
+            if (playerStat.swiftnessLevel >= STAT_LEVEL_CAP){
+                rollPlayerStats(player);
+                return;
+            }
+
+            player.sendMessage(ChatColor.BLUE + "Swiftness increased!");
+            playerStat.swiftnessLevel++;
+        } else if (random == 1){
+            if (playerStat.strengthLevel >= STAT_LEVEL_CAP){
+                rollPlayerStats(player);
+                return;
+            }
+
+            player.sendMessage(ChatColor.RED + "Strength increased!");
+            playerStat.strengthLevel++;
+        } else if (random == 2){
+            if (playerStat.luckLevel >= STAT_LEVEL_CAP){
+                rollPlayerStats(player);
+                return;
+            }
+
+            player.sendMessage(ChatColor.DARK_GREEN + "Luck increased!");
+            playerStat.luckLevel++;
         }
     }
 
@@ -98,16 +115,28 @@ public class PlayerManager {
         PlayerStat playerStat = playerStats.get(player.getName());
 
         if (playerStat.swiftnessLevel > 0){
+            if (playerStat.swiftnessLevel > STAT_LEVEL_CAP){
+                playerStat.swiftnessLevel = STAT_LEVEL_CAP;
+            }
+
             player.removePotionEffect(PotionEffectType.SPEED);
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, PotionEffect.INFINITE_DURATION, playerStat.swiftnessLevel - 1));
         }
 
         if (playerStat.strengthLevel > 0){
+            if (playerStat.strengthLevel > STAT_LEVEL_CAP){
+                playerStat.strengthLevel = STAT_LEVEL_CAP;
+            }
+
             player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, PotionEffect.INFINITE_DURATION, playerStat.strengthLevel - 1));
         }
 
         if (playerStat.luckLevel > 0){
+            if (playerStat.luckLevel > STAT_LEVEL_CAP){
+                playerStat.luckLevel = STAT_LEVEL_CAP;
+            }
+
             player.removePotionEffect(PotionEffectType.LUCK);
             player.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, PotionEffect.INFINITE_DURATION, playerStat.luckLevel - 1));
         }
